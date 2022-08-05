@@ -91,10 +91,15 @@ fi
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
+alias l='ls -CFS'
 
 # FZF Aliases
 alias v='vim $(fzf -m)'
+
+# Git dotfiles
+# https://news.ycombinator.com/item?id=11071754
+alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
 
 # Note Aliases
 alias rgn="rg -F '[NOTE]'"
