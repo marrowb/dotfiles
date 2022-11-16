@@ -1,0 +1,52 @@
+session_name: EOIR Discovery
+start_directory: ~/better-acis
+windows:
+  - window_name: docker
+    layout: main-vertical
+    options:
+      main-pane-width: 40
+    panes:
+      - shell_command: # pane no. 1
+          - docker-compose up
+        focus: true
+      - echo second pane # pane no. 2
+  - window_name: acis
+    layout: main-vertical
+    options:
+      main-pane-width: 40
+    shell_command_before:
+      - cd ~/better-acis
+    panes:
+      - shell_command: # pane no. 1
+          - vim .
+  - window_name: CleanCsv
+    layout: main-vertical
+    options:
+      main-pane-width: 40
+    shell_command_before:
+      - cd ~/repos/CleanCsv
+    panes:
+      - shell_command: # pane no. 1
+          - vim .
+        focus: true
+      - shell_command: # pane no. 2
+          - source .env/bin/activate
+          - ipython
+  - window_name: bsawf
+    layout: main-vertical
+    options:
+      main-pane-width: 40
+    shell_command_before:
+      - cd ~/course-materials/bsawf
+    panes:
+      - shell_command: # pane no. 1
+          - vim .
+  - window_name: microblog
+    layout: main-vertical
+    options:
+      main-pane-width: 40
+    shell_command_before:
+      - cd ~/course-materials/microblog
+    panes:
+      - shell_command: # pane no. 1
+          - vim .
