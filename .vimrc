@@ -10,8 +10,8 @@ Plug 'https://github.com/junegunn/limelight.vim'
 unlet g:plug_url_format
 
 " LaTeX
-Plug 'ying17zi/vim-live-latex-preview'
-Plug 'xuhdev/vim-latex-live-preview'
+" Plug 'ying17zi/vim-live-latex-preview'
+" Plug 'xuhdev/vim-latex-live-preview'
 
 " Color Schemes
 Plug 'gruvbox-community/gruvbox'
@@ -323,14 +323,14 @@ let g:fzf_colors =
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
   \ 'ctrl-b': 'split',
-  \ 'ctrl-v': 'vsplit',
+  \ 'ctrl-i': 'vsplit',
   \ 'ctrl-y': {lines -> setreg('*', join(lines, "\n"))}}
 
 " Launch fzf with CTRL+P.
 nnoremap <silent> <C-p> :FZF -m<CR>
 
 " Map a few common things to do with FZF.
-nnoremap <silent> <Leader><Enter> :Buffers<CR>
+nnoremap <silent> ; :Buffers<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
 
 " Allow passing optional flags into the Rg command.

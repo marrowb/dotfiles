@@ -14,6 +14,10 @@ case $- in
       *) return;;
 esac
 
+# WSL2 Xserver
+# export DISPLAY=$(ip route|awk '/^default/{print $3}'):0.0
+# export DISPLAY=host.docker.internal:0
+
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options
 HISTCONTROL=ignoreboth
@@ -98,7 +102,7 @@ alias v='vim $(fzf -m)'
 
 # Git dotfiles
 # https://news.ycombinator.com/item?id=11071754
-alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+alias config='/usr/bin/git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 
 
 # Note Aliases
