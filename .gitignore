@@ -1,6 +1,7 @@
 tags
 test.sh
 .luarc.json
+.github
 
 spell/
 lazy-lock.json
