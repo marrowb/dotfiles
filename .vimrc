@@ -36,6 +36,8 @@ Plug 'tpope/vim-surround'
 " . to repeat tpope's additions to vim
 Plug 'tpope/vim-repeat'
 
+Plug 'tpope/vim-dadbod'
+
 " gcc coments out a line
 " gc comments out the target of a motion
 Plug 'tpope/vim-commentary'
@@ -82,6 +84,9 @@ Plug 'christoomey/vim-tmux-runner'
 Plug 'tpope/vim-speeddating'
 Plug 'jceb/vim-orgmode'
 
+" Vim Test
+Plug 'janko/vim-test'
+
 " FZF
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -92,6 +97,9 @@ Plug 'lambdalisue/fern-mapping-mark-children.vim'
 
 "Syntax Highlighting
 Plug 'vim-python/python-syntax'
+
+" Jinja Syntax
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 call plug#end()
 
@@ -123,6 +131,9 @@ set background=dark
 
 "Python Syntax Highlighting
 let g:python_highlight_all = 1
+
+" Allow running aliases
+set shellcmdflag=-ic
 
 " Spaces & Tabs 
 set tabstop=4           " 4 space tab
@@ -333,6 +344,8 @@ nnoremap <silent> <C-p> :FZF -m<CR>
 nnoremap <silent> ; :Buffers<CR>
 nnoremap <silent> <Leader>l :Lines<CR>
 
+
+
 " Allow passing optional flags into the Rg command.
 "   Example: :Rg myterm -g '*.md'
 command! -bang -nargs=* Rg
@@ -400,6 +413,24 @@ augroup FernGroup
   autocmd FileType fern setlocal norelativenumber | setlocal nonumber | call FernInit()
 augroup END
 
+" .............................................................................
+" janko/vim-test
+" .............................................................................
+
+if has('nvim')
+  let test#strategy='neovim'
+else
+  let test#strategy='vimterminal'
+endif
+
+let test#python#runner='pytest'
+let test#python#pytest#executable='docker compose exec web py.test'
+
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-a> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-v> :TestVisit<CR>
 
 " .............................................................................
 " unblevable/quick-scope

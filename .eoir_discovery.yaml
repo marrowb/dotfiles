@@ -1,52 +1,52 @@
-session_name: EOIR Discovery
-start_directory: ~/better-acis
+session_name: bklg
+start_directory: ~/acis
 windows:
   - window_name: docker
     layout: main-vertical
-    options:
-      main-pane-width: 40
     panes:
       - shell_command: # pane no. 1
-          - docker-compose up
+          - docker compose up
         focus: true
       - echo second pane # pane no. 2
-  - window_name: acis
+  - window_name: dev
     layout: main-vertical
-    options:
-      main-pane-width: 40
     shell_command_before:
-      - cd ~/better-acis
+      - cd ~/acis
+    panes:
+      - shell_command: # pane no. 1
+          - nvim .
+  - window_name: prod
+    layout: main-vertical
+    shell_command_before:
+      - cd ~/repos/test-data
     panes:
       - shell_command: # pane no. 1
           - vim .
-  - window_name: CleanCsv
+  - window_name: ext
     layout: main-vertical
-    options:
-      main-pane-width: 40
     shell_command_before:
-      - cd ~/repos/CleanCsv
+      - cd ~/repos/bklg-extension
     panes:
       - shell_command: # pane no. 1
           - vim .
-        focus: true
-      - shell_command: # pane no. 2
-          - source .env/bin/activate
-          - ipython
+  - window_name: playwright
+    layout: main-vertical
+    shell_command_before:
+      - cd ~/repos/playwright
+    panes:
+      - shell_command: # pane no. 1
+          - vim .
   - window_name: bsawf
     layout: main-vertical
-    options:
-      main-pane-width: 40
     shell_command_before:
-      - cd ~/course-materials/bsawf
+      - cd ~/bsawf/bsawf
     panes:
       - shell_command: # pane no. 1
           - vim .
   - window_name: microblog
     layout: main-vertical
-    options:
-      main-pane-width: 40
     shell_command_before:
-      - cd ~/course-materials/microblog
+      - cd ~/microblog
     panes:
       - shell_command: # pane no. 1
           - vim .

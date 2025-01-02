@@ -5,7 +5,9 @@
 # If you have anything that's using the Debug Trap or PROMPT_COMMAND 
 # change it to use preexec or precmd
 # See also https://github.com/rcaloras/bash-preexec
-
+#
+# Vi-editing mode
+set -o emacs
 # Adding files to the path
 
 # If not running interactively, don't do anything
@@ -93,12 +95,60 @@ fi
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
 # some more ls aliases
+alias lh='ls -latrh'
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CFS'
 
 # FZF Aliases
 alias v='vim $(fzf -m)'
+
+# Git aliases
+alias gcs='git commit -S -m'
+
+# Docker aliases
+alias dcrestart='docker compose stop && docker compose rm -f && docker compose up'
+
+# Man page search
+alias fman='compgen -c | fzf | xargs man'
+
+#cp
+alias copy='cp ~/$(cd ~ && fzf)' 
+
+# Find Large Files
+alias bigfiles='find ~ -type f -printf "%s\t%p\n" | sort -n | tail -20 | awk '"'"'BEGIN {OFS="\t"} {$1=sprintf("%.2f", $1/(1024*1024*1024)); print $1, "GB", $2}'"'"
+
+#Notify
+not() {
+    local last_command="$(fc -ln -1)"
+    notify-send "Command Finished" "'$last_command' has finished executing."
+}
+
+#LLM Functions
+#
+
+alias opus='llm -m claude-3-opus'
+alias haiku='llm -m claude-3-opus'
+
+comment(){
+  # Use the llm command with the claude-3-opus model
+  # Pass the instructions as a string argument using the -s flag
+  llm -m claude-3-opus -s 'Add comments to this code. Respond with the code and comments. Do not alter the functional aspect of the code, but still return it. Be sure and include the code in the response. Do not respond in a markdown code block. Just respond with the code and comments. Do not preamble or say anything before or after the code. for example: If the user sent "print(1)\nprint(2)", you would reply "# Prints 1\nprint(1)\n# Prints 2\nprint(2)"'
+}
+
+format() {
+  llm -m claude-3-opus -s "Please reformat the code in the following way: $1.Do not alter the functional aspect of the code, but still return it. Be sure and include the code in the response. Do not respond in a markdown code block. Just respond with the reformatted code. Do not preamble or say anything before or after the code."
+}
+
+
+# Rust
+export PATH="$PATH:/home/shuba/.cargo/bin"
+
+# Neovim config
+# alias vim='env -u VIMINIT vim'
+# alias nvim="VIMINIT='$HOME/.cfg/nvim/init.lua' nvim"
+export XDG_CONFIG_HOME=$HOME/.config
+alias nvim="/usr/local/bin/nvim"
 
 # Git dotfiles
 # https://news.ycombinator.com/item?id=11071754
@@ -196,4 +246,11 @@ export PATH="$HOME/gems/bin:$PATH"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
+export FLYCTL_INSTALL="/home/shuba/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
+export PATH="$HOME/bin:$PATH"
+
+export DENO_INSTALL="/home/shuba/.deno"
+export PATH="$DENO_INSTALL/bin:$PATH"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
