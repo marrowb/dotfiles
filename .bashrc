@@ -142,7 +142,7 @@ format() {
 
 
 # Rust
-export PATH="$PATH:/home/shuba/.cargo/bin"
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # Neovim config
 # alias vim='env -u VIMINIT vim'
@@ -246,12 +246,12 @@ export PATH="$HOME/gems/bin:$PATH"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
-export FLYCTL_INSTALL="/home/shuba/.fly"
+export FLYCTL_INSTALL="$HOME/.fly"
 export PATH="$FLYCTL_INSTALL/bin:$PATH"
 
 export PATH="$HOME/bin:$PATH"
 
-export DENO_INSTALL="/home/shuba/.deno"
+export DENO_INSTALL="$HOME/.deno"
 export PATH="$DENO_INSTALL/bin:$PATH"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
