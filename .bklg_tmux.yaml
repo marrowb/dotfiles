@@ -21,32 +21,11 @@ windows:
       - cd ~/repos/test-data
     panes:
       - shell_command: # pane no. 1
-          - vim .
+          - nvim .
   - window_name: ext
     layout: main-vertical
     shell_command_before:
       - cd ~/repos/bklg-extension
     panes:
       - shell_command: # pane no. 1
-          - vim .
-  - window_name: playwright
-    layout: main-vertical
-    shell_command_before:
-      - cd ~/repos/playwright
-    panes:
-      - shell_command: # pane no. 1
-          - vim .
-  - window_name: bsawf
-    layout: main-vertical
-    shell_command_before:
-      - cd ~/bsawf/bsawf
-    panes:
-      - shell_command: # pane no. 1
-          - vim .
-  - window_name: microblog
-    layout: main-vertical
-    shell_command_before:
-      - cd ~/microblog
-    panes:
-      - shell_command: # pane no. 1
-          - vim .
+          - nvim .
