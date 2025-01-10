@@ -1,3 +1,4 @@
+command="tmuxp load ~/.bklg_tmux.yaml"
 font-family="FiraCode Nerd Font"
 font-thicken = true
 clipboard-read = allow
