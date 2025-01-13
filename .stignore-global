@@ -38,6 +38,7 @@ Thumbs.db
 .idea
 .vscode
 *.swp
+*.stswp
 *.swo
 .vs
 *.sublime-workspace
@@ -115,3 +116,4 @@ release/
 /out/
 /build/
 /dist/
+
