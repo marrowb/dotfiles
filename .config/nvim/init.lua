@@ -371,7 +371,7 @@ require('lazy').setup({
       -- Set pytest as the Python test runner
       vim.g['test#python#runner'] = 'pytest'
       -- Configure the pytest command to run in Docker
-      vim.g['test#python#pytest#executable'] = 'docker compose exec web py.test'
+      vim.g['test#python#pytest#executable'] = 'docker compose exec web py.test --pdb'
 
       -- Set up keymaps
       vim.keymap.set('n', 't<C-n>', '<cmd>TestNearest<CR>', { silent = true, desc = 'Run nearest test' })
@@ -903,6 +903,7 @@ require('lazy').setup({
         'prettier',
         'docker_compose_language_service',
         'dockerls',
+        'markdownlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1094,7 +1095,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin-mocha'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'

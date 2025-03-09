@@ -424,7 +424,7 @@ else
 endif
 
 let test#python#runner='pytest'
-let test#python#pytest#executable='docker compose exec web py.test'
+let test#python#pytest#executable='docker compose exec web py.test --pdb'
 
 nmap <silent> t<C-n> :TestNearest<CR>
 nmap <silent> t<C-f> :TestFile<CR>
