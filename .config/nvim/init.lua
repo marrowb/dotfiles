@@ -308,9 +308,28 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
-  { 'tpope/vim-dadbod', lazy = true, ft = { 'sql', 'psql' } },
-  'kristijanhusak/vim-dadbod-completion',
-  'kristijanhusak/vim-dadbod-ui',
+  {
+    'tpope/vim-dadbod',
+    lazy = true,
+    enabled = true,
+    dependencies = {
+      { 'kristijanhusak/vim-dadbod-ui' },
+      { 'kristijanhusak/vim-dadbod-completion' },
+    },
+    ft = { 'sql', 'psql' },
+    config = function()
+      vim.g.db_ui_save_location = '~/acis/sql-scripts/db_ui'
+      -- vim.g.db_ui_tmp_query_location = "~/code/queries"
+      vim.g.db_ui_use_nerd_fonts = true
+      -- vim.g.db_ui_execute_on_save = false
+      vim.g.db_ui_use_nvim_notify = true
+    end,
+    cmd = { 'DBUI', 'DBUIFindBuffer' },
+  },
+
+  -- { 'tpope/vim-dadbod', lazy = true,
+  -- 'kristijanhusak/vim-dadbod-completion',
+  -- 'kristijanhusak/vim-dadbod-ui',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following

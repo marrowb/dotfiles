@@ -1,5 +1,5 @@
 session_name: bklg
-start_directory: ~/acis
+start_directory: ~/bklg
 windows:
   - window_name: docker
     layout: main-vertical
@@ -11,7 +11,7 @@ windows:
   - window_name: dev
     layout: main-vertical
     shell_command_before:
-      - cd ~/acis
+      - cd ~/bklg
     panes:
       - shell_command: # pane no. 1
           - nvim .
