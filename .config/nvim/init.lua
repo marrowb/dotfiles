@@ -308,6 +308,28 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
   'tpope/vim-fugitive',
+  {
+    'tpope/vim-dadbod',
+    lazy = true,
+    enabled = true,
+    dependencies = {
+      { 'kristijanhusak/vim-dadbod-ui' },
+      { 'kristijanhusak/vim-dadbod-completion' },
+    },
+    ft = { 'sql', 'psql' },
+    config = function()
+      vim.g.db_ui_save_location = '~/acis/sql-scripts/db_ui'
+      -- vim.g.db_ui_tmp_query_location = "~/code/queries"
+      vim.g.db_ui_use_nerd_fonts = true
+      -- vim.g.db_ui_execute_on_save = false
+      vim.g.db_ui_use_nvim_notify = true
+    end,
+    cmd = { 'DBUI', 'DBUIFindBuffer' },
+  },
+
+  -- { 'tpope/vim-dadbod', lazy = true,
+  -- 'kristijanhusak/vim-dadbod-completion',
+  -- 'kristijanhusak/vim-dadbod-ui',
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
@@ -389,7 +411,7 @@ require('lazy').setup({
       -- Set pytest as the Python test runner
       vim.g['test#python#runner'] = 'pytest'
       -- Configure the pytest command to run in Docker
-      vim.g['test#python#pytest#executable'] = 'docker compose exec web py.test'
+      vim.g['test#python#pytest#executable'] = 'docker compose exec web py.test --pdb'
 
       -- Set up keymaps
       vim.keymap.set('n', 't<C-n>', '<cmd>TestNearest<CR>', { silent = true, desc = 'Run nearest test' })
@@ -554,7 +576,12 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', ';', builtin.buffers, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', ';', function()
+        builtin.buffers { ignore_current_buffer = true, sort_mru = true }
+      end, { desc = '[ ] Find existing buffers' })
+      vim.keymap.set('n', '<leader>td', function()
+        vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+      end, { silent = true, noremap = true })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
@@ -916,6 +943,7 @@ require('lazy').setup({
         'prettier',
         'docker_compose_language_service',
         'dockerls',
+        'markdownlint',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1093,6 +1121,13 @@ require('lazy').setup({
           { name = 'path' },
         },
       }
+      -- vim-dadbod
+      cmp.setup.filetype({ 'sql' }, {
+        sources = {
+          { name = 'vim-dadbod-completion' },
+          { name = 'buffer' },
+        },
+      })
     end,
   },
 
@@ -1107,7 +1142,7 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin-mocha'
 
       -- You can configure highlights by doing something like:
       vim.cmd.hi 'Comment gui=none'
