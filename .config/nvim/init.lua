@@ -359,6 +359,24 @@ require('lazy').setup({
     end,
   },
   {
+    'lervag/vimtex',
+    config = function()
+      vim.g.tex_flavor = 'latex'
+      vim.g.vimtex_compiler_engine = 'pdflatex'
+      vim.g.vimtex_view_method = 'zathura'
+      vim.g.maplocalleader = ' '
+      -- Lets silence some errors :)
+      vim.g.vimtex_quickfix_ignore_filters = {
+        'Underfull',
+        'Overfull',
+        'LaTeX Warning: .+ float specifier changed to',
+        'LaTeX hooks Warning',
+        'Package siunitx Warning: Detected the "physics" package:',
+        'Package hyperref Warning: Token not allowed in a PDF string',
+      }
+    end,
+  },
+  {
     'vim-test/vim-test',
     config = function()
       -- Set the test strategy
@@ -1129,7 +1147,8 @@ require('lazy').setup({
       require('mini.surround').setup()
 
       -- FIXME This can be useful but it needs to be configred not on startup
-      -- require('mini.files').setup()
+      require('mini.files').setup()
+      vim.keymap.set('n', '<leader>e', '<cmd>lua MiniFiles.open(vim.api.nvim_buf_get_name(0))<cr>', { desc = 'File explorer' })
 
       local starter = require 'mini.starter'
       starter.setup {
