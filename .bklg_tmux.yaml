@@ -29,3 +29,10 @@ windows:
     panes:
       - shell_command: # pane no. 1
           - nvim .
+  - window_name: eoir
+    layout: main-vertical
+    shell_command_before:
+      - cd ~/repos/eoir
+    panes:
+      - shell_command: # pane no. 1
+          - nvim .

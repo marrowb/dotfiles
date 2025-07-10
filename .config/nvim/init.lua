@@ -137,6 +137,10 @@ vim.opt.updatetime = 250
 -- Displays which-key popup sooner
 vim.opt.timeoutlen = 300
 
+-- Line numbers
+vim.wo.number = true
+vim.wo.relativenumber = true
+
 -- Configure how new splits should be opened
 vim.opt.splitright = true
 vim.opt.splitbelow = true
@@ -318,7 +322,7 @@ require('lazy').setup({
     },
     ft = { 'sql', 'psql' },
     config = function()
-      vim.g.db_ui_save_location = '~/acis/sql-scripts/db_ui'
+      vim.g.db_ui_save_location = '~/bklg/sql-scripts/db_ui'
       -- vim.g.db_ui_tmp_query_location = "~/code/queries"
       vim.g.db_ui_use_nerd_fonts = true
       -- vim.g.db_ui_execute_on_save = false
@@ -326,10 +330,9 @@ require('lazy').setup({
     end,
     cmd = { 'DBUI', 'DBUIFindBuffer' },
   },
-
-  -- { 'tpope/vim-dadbod', lazy = true,
-  -- 'kristijanhusak/vim-dadbod-completion',
-  -- 'kristijanhusak/vim-dadbod-ui',
+  {
+    'github/copilot.vim',
+  },
 
   -- NOTE: Plugins can also be added by using a table,
   -- with the first argument being the link and the following
