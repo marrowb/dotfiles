@@ -108,7 +108,6 @@ vim.opt.mouse = 'a'
 
 -- Don't show the mode, since it's already in the status line
 vim.opt.showmode = false
-
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
@@ -311,6 +310,7 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
   'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
+  'tpope/vim-capslock',
   'tpope/vim-fugitive',
   {
     'tpope/vim-dadbod',
@@ -329,6 +329,23 @@ require('lazy').setup({
       vim.g.db_ui_use_nvim_notify = true
     end,
     cmd = { 'DBUI', 'DBUIFindBuffer' },
+  },
+  {
+    'ojroques/nvim-osc52',
+    config = function()
+      require('osc52').setup {
+        max_length = 0, -- Maximum length of selection (0 for no limit)
+        silent = false, -- Disable message on successful copy
+        trim = false, -- Trim surrounding whitespaces before copy
+      }
+      local function copy()
+        if (vim.v.event.operator == 'y' or vim.v.event.operator == 'd') and vim.v.event.regname == '' then
+          require('osc52').copy_register ''
+        end
+      end
+
+      vim.api.nvim_create_autocmd('TextYankPost', { callback = copy })
+    end,
   },
   {
     'github/copilot.vim',
@@ -814,50 +831,50 @@ require('lazy').setup({
           },
         },
 
-        -- tailwindcss = {
-        --   filetypes = {
-        --     'html',
-        --     'htmldjango',
-        --     'jinja.html',
-        --     'css',
-        --     'scss',
-        --     'javascript',
-        --     'javascriptreact',
-        --     'typescript',
-        --     'typescriptreact',
-        --   },
-        --   root_dir = function()
-        --     return require('lspconfig.util').root_pattern 'tailwind.config.js'(fname) or vim.fn.getcwd()
-        --   end,
-        --   init_options = {
-        --     userLanguages = {
-        --       htmldjango = 'html',
-        --       ['jinja.html'] = 'html',
-        --     },
-        --   },
-        --   settings = {
-        --     tailwindCSS = {
-        --       experimental = {
-        --         classRegex = {
-        --           'class[Name]*=["\']([^"\']*)["\']',
-        --         },
-        --       },
-        --       includeLanguages = {
-        --         htmldjango = 'html',
-        --         ['jinja.html'] = 'html',
-        --       },
-        --       validate = true,
-        --       hovers = true,
-        --       suggestions = true,
-        --       classAttributes = {
-        --         'class',
-        --         'className',
-        --         'classList',
-        --         'ngClass',
-        --       },
-        --     },
-        --   },
-        -- },
+        tailwindcss = {
+          filetypes = {
+            'html',
+            'htmldjango',
+            'jinja.html',
+            'css',
+            'scss',
+            'javascript',
+            'javascriptreact',
+            'typescript',
+            'typescriptreact',
+          },
+          root_dir = function()
+            return require('lspconfig.util').root_pattern 'tailwind.config.js'(fname) or vim.fn.getcwd()
+          end,
+          init_options = {
+            userLanguages = {
+              htmldjango = 'html',
+              ['jinja.html'] = 'html',
+            },
+          },
+          settings = {
+            tailwindCSS = {
+              experimental = {
+                classRegex = {
+                  'class[Name]*=["\']([^"\']*)["\']',
+                },
+              },
+              includeLanguages = {
+                htmldjango = 'html',
+                ['jinja.html'] = 'html',
+              },
+              validate = true,
+              hovers = true,
+              suggestions = true,
+              classAttributes = {
+                'class',
+                'className',
+                'classList',
+                'ngClass',
+              },
+            },
+          },
+        },
 
         djlint = {
           filetypes = { 'htmldjango', 'jinja.html' },
@@ -947,6 +964,7 @@ require('lazy').setup({
         'docker_compose_language_service',
         'dockerls',
         'markdownlint',
+        'r_language_server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
